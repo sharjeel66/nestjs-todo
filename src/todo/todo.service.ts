@@ -18,9 +18,15 @@ export class TodoService {
     return todo;
   }
 
+  private getNextId(): number {
+    if (todos.length > 0) {
+      return Math.max(...todos.map((todo) => todo.id)) + 1;
+    } else return 1;
+  }
+
   //Function to create todo
   createTodo(newTodo: CreateTodoDto): TodoInterface {
-    let id = (todos.at(-1)?.id ?? 0) + 1; //This finds the last id and adds 1
+    let id = this.getNextId(); //This finds the last id and adds 1
     const task: TodoInterface = {
       id: id,
       task: newTodo.task,
