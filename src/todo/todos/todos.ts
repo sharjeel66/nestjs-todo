@@ -1,5 +1,5 @@
-import { TodoEntity } from './todo.entity';
-const todos: TodoEntity[] = [
+import { Todo } from './todo.interface';
+const todos: Todo[] = [
   {
     id: 1,
     task: 'Complete todos project',

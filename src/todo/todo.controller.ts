@@ -9,7 +9,7 @@ import {
   Patch,
 } from '@nestjs/common';
 import { TodoService } from './todo.service';
-import { TodoEntity } from './todos/todo.entity';
+import { Todo as TodoInterface } from './todos/todo.interface';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 
@@ -18,22 +18,22 @@ export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
   @Get()
-  getAllTodos(): TodoEntity[] {
+  getAllTodos(): TodoInterface[] {
     return this.todoService.getAllTodos();
   }
 
   @Get(':id')
-  getTodoById(@Param('id', ParseIntPipe) id: number): TodoEntity | undefined {
+  getTodoById(@Param('id', ParseIntPipe) id: number): TodoInterface {
     return this.todoService.getTodoById(id);
   }
 
   @Post()
-  createTodo(@Body() newTodo: CreateTodoDto): TodoEntity {
+  createTodo(@Body() newTodo: CreateTodoDto): TodoInterface {
     return this.todoService.createTodo(newTodo);
   }
 
   @Delete(':id')
-  deleteTodoById(@Param('id', ParseIntPipe) id: number): TodoEntity {
+  deleteTodoById(@Param('id', ParseIntPipe) id: number): TodoInterface {
     return this.todoService.deleteTodoById(id);
   }
 
@@ -41,7 +41,7 @@ export class TodoController {
   updateTodo(
     @Param('id', ParseIntPipe) id: number,
     @Body() updatedTodo: UpdateTodoDto,
-  ): TodoEntity | undefined {
+  ): TodoInterface {
     return this.todoService.updateTodo(id, updatedTodo);
   }
 }
