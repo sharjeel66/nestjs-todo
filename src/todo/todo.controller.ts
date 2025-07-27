@@ -7,6 +7,8 @@ import {
   Body,
   Delete,
   Patch,
+  HttpStatus,
+  HttpCode,
 } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { Todo as TodoInterface } from './todos/todo.interface';
@@ -33,7 +35,8 @@ export class TodoController {
   }
 
   @Delete(':id')
-  deleteTodoById(@Param('id', ParseIntPipe) id: number): TodoInterface {
+  @HttpCode(HttpStatus.NO_CONTENT)
+  deleteTodoById(@Param('id', ParseIntPipe) id: number): void {
     return this.todoService.deleteTodoById(id);
   }
 

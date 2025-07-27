@@ -38,10 +38,10 @@ export class TodoService {
   }
 
   //Delete by id. Incase of not found, throws an exception
-  deleteTodoById(id: number): TodoInterface {
+  deleteTodoById(id: number): void {
     let index = todos.findIndex((todo) => todo.id === id);
     if (index !== -1) {
-      return todos.splice(index, 1)[0];
+      todos.splice(index, 1);
     } else {
       throw new NotFoundException();
     }
